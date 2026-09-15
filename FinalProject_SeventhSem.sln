@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 18
-VisualStudioVersion = 18.5.11709.299 stable
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37314.3 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject_SeventhSem", "FinalProject_SeventhSem\FinalProject_SeventhSem.csproj", "{AE20C27E-69B7-472F-BE24-FA71CC2141D3}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject_SeventhSem.Application", "FinalProject_SeventhSem.Application\FinalProject_SeventhSem.Application.csproj", "{A9DD7D0B-B244-4AFD-83BE-701389E6C2E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalProject_SeventhSem.Infrastructure", "FinalProject_SeventhSem.Infrastructure\FinalProject_SeventhSem.Infrastructure.csproj", "{074D6C3B-63A5-4514-BD4B-61C75DA58203}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "AIService", "AIService\AIService.pyproj", "{361FEDA5-852C-4F46-B309-0528434BED50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{074D6C3B-63A5-4514-BD4B-61C75DA58203}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{074D6C3B-63A5-4514-BD4B-61C75DA58203}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{074D6C3B-63A5-4514-BD4B-61C75DA58203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{361FEDA5-852C-4F46-B309-0528434BED50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{361FEDA5-852C-4F46-B309-0528434BED50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{361FEDA5-852C-4F46-B309-0528434BED50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{361FEDA5-852C-4F46-B309-0528434BED50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

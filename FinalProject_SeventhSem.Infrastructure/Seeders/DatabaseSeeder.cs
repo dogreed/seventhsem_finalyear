@@ -38,8 +38,10 @@ public class DatabaseSeeder
         await SeedSkillsAsync(ct);
         await SeedStacksChaptersQuestionsAsync(ct);
         await SeedResourcesAsync(ct);
+        await EnsureRecommendationDataAsync(ct);
 
-        _logger.LogInformation("Database seeder complete.");
+
+		_logger.LogInformation("Database seeder complete.");
     }
 
 
@@ -504,6 +506,79 @@ public class DatabaseSeeder
             },
         };
     }
+	private async Task EnsureRecommendationDataAsync(CancellationToken ct)
+	{
+		// 1. Make sure Dependency Injection skill exists
+		var diSkill = await _context.Skills
+			.FirstOrDefaultAsync(s => s.Name == "Dependency Injection", ct);
 
+		if (diSkill == null)
+		{
+			diSkill = new Skill
+			{
+				Name = "Dependency Injection",
+				CreatedAt = DateTime.UtcNow
+			};
+
+			_context.Skills.Add(diSkill);
+
+			await _context.SaveChangesAsync(ct);
+
+			_context.SkillAliases.Add(new SkillAlias
+			{
+				SkillId = diSkill.Id,
+				Alias = "dependency injection"
+			});
+
+			_context.SkillAliases.Add(new SkillAlias
+			{
+				SkillId = diSkill.Id,
+				Alias = "di"
+			});
+
+			await _context.SaveChangesAsync(ct);
+		}
+
+		// 2. Make sure Dependency Injection resource exists
+		var resource = await _context.Resources
+			.Include(r => r.SkillMappings)
+			.FirstOrDefaultAsync(
+				r => r.Title == "Dependency Injection in ASP.NET Core — Microsoft Learn",
+				ct);
+
+		if (resource == null)
+		{
+			resource = new Resource
+			{
+				Title = "Dependency Injection in ASP.NET Core — Microsoft Learn",
+				Url = "https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection",
+				ResourceType = "Docs",
+				CreatedAt = DateTime.UtcNow
+			};
+
+			_context.Resources.Add(resource);
+
+			await _context.SaveChangesAsync(ct);
+		}
+
+		// 3. Make sure resource is mapped to Dependency Injection skill
+		var mappingExists = await _context.ResourceSkillMappings
+			.AnyAsync(
+				x => x.ResourceId == resource.Id &&
+					 x.SkillId == diSkill.Id,
+				ct);
+
+		if (!mappingExists)
+		{
+			_context.ResourceSkillMappings.Add(new ResourceSkillMapping
+			{
+				ResourceId = resource.Id,
+				SkillId = diSkill.Id,
+				CreatedAt = DateTime.UtcNow
+			});
+
+			await _context.SaveChangesAsync(ct);
+		}
+	}
 
 }

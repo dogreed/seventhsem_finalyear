@@ -53,8 +53,12 @@ public static class InfrastructureServiceRegistration
         services.AddScoped<IResumeParsingService, ResumeParsingEngine>();
         services.AddScoped<IMatchingService, MatchingEngine>();
         services.AddScoped<IScoringService, ScoringEngine>();
+		services.AddHttpClient<IRecommendationService, RecommendationService>(client =>
+		{
+			client.BaseAddress = new Uri("http://127.0.0.1:8000/");
+		});
 
-        services.AddScoped<FinalProject_SeventhSem.Infrastructure.Seeders.DatabaseSeeder>();
+		services.AddScoped<FinalProject_SeventhSem.Infrastructure.Seeders.DatabaseSeeder>();
 
         return services;
     }
